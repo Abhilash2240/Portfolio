@@ -1,0 +1,429 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ARCHIVE_01 | About</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#c7cfff",
+                        "surface-container-high": "#e1e3e3",
+                        "on-surface-variant": "#5a5c5c",
+                        "tertiary-container": "#d299ff",
+                        "surface-dim": "#d2d5d5",
+                        "tertiary-dim": "#741eb4",
+                        "on-primary-container": "#401500",
+                        "tertiary-fixed": "#d299ff",
+                        "surface-variant": "#dbdddd",
+                        "surface-container": "#e7e8e8",
+                        "on-secondary-fixed-variant": "#003cd6",
+                        "primary-fixed-dim": "#f66700",
+                        "on-primary": "#fff0ea",
+                        "secondary": "#0846ed",
+                        "on-tertiary": "#fceeff",
+                        "tertiary-fixed-dim": "#c986ff",
+                        "primary": "#9c3f00",
+                        "on-secondary": "#f2f1ff",
+                        "surface-container-low": "#f0f1f1",
+                        "on-primary-fixed-variant": "#4f1c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0c0f0f",
+                        "inverse-on-surface": "#9c9d9d",
+                        "outline": "#757777",
+                        "primary-container": "#ff7a2f",
+                        "inverse-primary": "#fe6b00",
+                        "secondary-fixed-dim": "#b5c0ff",
+                        "primary-dim": "#893600",
+                        "on-error": "#ffefec",
+                        "surface-bright": "#f6f6f6",
+                        "outline-variant": "#acadad",
+                        "secondary-container": "#c7cfff",
+                        "on-primary-fixed": "#000000",
+                        "on-tertiary-fixed-variant": "#580091",
+                        "on-tertiary-container": "#4c007d",
+                        "on-background": "#2d2f2f",
+                        "surface": "#f6f6f6",
+                        "on-error-container": "#520c00",
+                        "error-container": "#f95630",
+                        "on-secondary-container": "#0035bf",
+                        "on-surface": "#2d2f2f",
+                        "error": "#b02500",
+                        "surface-tint": "#9c3f00",
+                        "error-dim": "#b92902",
+                        "background": "#f6f6f6",
+                        "secondary-dim": "#003cd3",
+                        "surface-container-highest": "#dbdddd",
+                        "tertiary": "#812fc1",
+                        "primary-fixed": "#ff7a2f",
+                        "on-tertiary-fixed": "#280046",
+                        "on-secondary-fixed": "#002691"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Space Grotesk", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .isometric-offset {
+            box-shadow: 6px 6px 0px 0px #000000;
+        }
+        .isometric-offset-gold {
+            box-shadow: 4px 4px 0px 0px #9c3f00;
+        }
+        .text-ring {
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .perspective-container {
+            perspective: 2000px;
+        }
+        
+        /* Atmospheric 3D Background */
+        .scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #fbfcfc 0%, #e7e8e8 100%);
+            perspective: 1200px;
+            overflow: hidden;
+        }
+
+        .glowing-grid {
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            bottom: -50%;
+            left: -100%;
+            background-image: 
+                linear-gradient(rgba(156, 63, 0, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(156, 63, 0, 0.15) 1px, transparent 1px);
+            background-size: 80px 80px;
+            transform: rotateX(75deg) translateY(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        .light-ray {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 200px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, transparent 80%);
+            transform: translateX(-50%) rotate(15deg);
+            filter: blur(40px);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--particle-color, #9c3f00);
+            opacity: 0.4;
+            pointer-events: none;
+            filter: blur(1px);
+        }
+
+        @keyframes orbital-particle {
+            0% { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+        }
+
+        /* Existing Animations */
+        @keyframes cameraSweep {
+            0% { 
+                opacity: 0; 
+                transform: rotateX(15deg) rotateY(-15deg) translateZ(-500px) scale(0.9);
+            }
+            100% { 
+                opacity: 1; 
+                transform: rotateX(0deg) rotateY(0deg) translateZ(0) scale(1);
+            }
+        }
+        .animate-camera-entry {
+            animation: cameraSweep 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform-origin: center center;
+        }
+
+        .reveal-step {
+            opacity: 0;
+            transform: translateZ(-100px) translateY(20px);
+            transition: opacity 1s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal-step.active {
+            opacity: 1;
+            transform: translateZ(0) translateY(0);
+        }
+
+        .tilt-card {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+        .tilt-card-inner {
+            transform: translateZ(20px);
+        }
+
+        .section-trigger {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .section-trigger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    
+        .holographic-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+            animation: float-glow 8s ease-in-out infinite alternate;
+        }
+        @keyframes float-glow {
+            0% { transform: translateZ(-50px) translateY(0) scale(1); }
+            100% { transform: translateZ(-50px) translateY(-20px) scale(1.1); }
+        }
+        .glow-gold { background: radial-gradient(circle, #9c3f00 0%, transparent 70%); }
+        .glow-blue { background: radial-gradient(circle, #0846ed 0%, transparent 70%); }
+        .glow-red { background: radial-gradient(circle, #812fc1 0%, transparent 70%); }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background min-h-screen selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- 3D Environment Layer -->
+<div class="scene-container" id="atmospheric-scene">
+<div class="light-ray"></div>
+<div class="light-ray" style="left: 20%; transform: rotate(-10deg); opacity: 0.3;"></div>
+<div class="glowing-grid" id="reactive-grid"></div>
+<div id="particle-container"></div>
+</div>
+<!-- TopNavBar -->
+
+<!-- Main Wrapper for Camera Sweep -->
+<div class="animate-camera-entry perspective-container">
+<!-- Main Content -->
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+<!-- Left Column: The 3D Archive Core -->
+<div class="relative flex flex-col items-center justify-center space-y-12 group reveal-step" id="hero-left">
+<!-- Orbiting Elements & Photo -->
+<div class="relative w-80 h-80 flex items-center justify-center tilt-card" id="portrait-tilt">
+<!-- Orbiting Rings -->
+<div class="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full animate-[spin_15s_linear_infinite]"></div>
+<div class="absolute inset-4 border border-secondary/20 rounded-full animate-[spin_10s_linear_infinite_reverse]"></div>
+<!-- Text Ring -->
+<div class="absolute inset-[-20px] text-ring pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<path d="M 50, 50 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="transparent" id="circlePath"></path>
+<text class="text-[6px] font-label font-bold uppercase tracking-widest fill-primary">
+<textpath href="#circlePath">
+                                DIGITAL_ARCHIVE_NODE_29 • THE_KINETIC_CURATOR • SYSTEM_STABLE • 
+                            </textpath>
+</text>
+</svg>
+</div>
+<!-- Profile Photo -->
+<div class="relative z-10 w-64 h-64 border-4 border-black p-1 bg-white isometric-offset group-hover:isometric-offset-gold transition-all tilt-card-inner">
+<img alt="Profile" class="w-full h-full object-cover grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPldWVniPqmmnA4V3m7F_0aePpkJqMA8O72P-gBcSGGxvhwHoROe-qpc12dO4XUrWeW_M2OnqLQua7ndxKIADJaYMcm_iZVpWg54m2Wif-JCusrvMu-EMEHMFeG_NaWFZtwQB-JxcU8T4KscKTN2PY8PLiSxNJzbD1gmE7W9eu8jmyQHpjEVevCE-7qMzkgoWLWt8hZE_wOZ6I6gr3-sa67puUrTE_3zJxP9U-5zJeQpKJuZVAj59MEaM_dZZmqmtH3825zItRpwQ1"/>
+<div class="absolute -top-4 -left-4 bg-primary text-white p-2 border-2 border-black font-label text-xs font-bold">SCAN_029</div>
+</div>
+</div>
+<!-- 3D Counters -->
+<div class="grid grid-cols-3 gap-6 w-full">
+<div class="bg-white/80 backdrop-blur-sm border-2 border-black p-4 isometric-offset text-center group/card hover:translate-y-[-4px] transition-transform">
+<div class="font-headline text-3xl font-black text-primary">42+</div>
+<div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Projects</div>
+</div>
+<div class="bg-white/80 backdrop-blur-sm border-2 border-black p-4 isometric-offset text-center group/card hover:translate-y-[-4px] transition-transform">
+<div class="font-headline text-3xl font-black text-secondary">12</div>
+<div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Certs</div>
+</div>
+<div class="bg-white/80 backdrop-blur-sm border-2 border-black p-4 isometric-offset text-center group/card hover:translate-y-[-4px] transition-transform">
+<div class="font-headline text-3xl font-black text-tertiary">08</div>
+<div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Years Exp</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Editorial Bio -->
+<div class="flex flex-col justify-center space-y-8 reveal-step relative" id="hero-right">
+<div class="absolute inset-0 -z-10 pointer-events-none overflow-visible">
+<div class="holographic-glow glow-gold w-64 h-64 -top-20 -left-20"></div>
+<div class="holographic-glow glow-blue w-72 h-72 top-1/2 -right-20" style="animation-delay: -2s;"></div>
+<div class="holographic-glow glow-red w-56 h-56 bottom-0 left-1/4" style="animation-delay: -4s;"></div>
+</div>
+<div class="space-y-4">
+<span class="inline-block px-3 py-1 bg-black text-white font-label text-xs uppercase tracking-[0.2em]">Archivist Protocol</span>
+<h1 class="font-headline text-6xl md:text-7xl font-bold leading-none tracking-tighter text-black">
+                    The <span class="text-primary italic">Kinetic</span><br/>Curator
+                </h1>
+</div>
+<div class="border-l-4 border-primary pl-8 space-y-6">
+<p class="font-headline italic text-2xl leading-relaxed text-on-surface">
+                    Merging the intellectual weight of a <span class="font-bold underline decoration-tertiary decoration-4 not-italic">vintage editorial gazette</span> with the high-octane energy of 3D Neo-Brutalism.
+                </p>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+                    ARCHIVE_01 is not just a repository—it's a living architectural space where design meets raw digital physics. I build digital experiences that refuse to stay flat, prioritizing narrative flow and technical precision.
+                </p>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<div class="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 border-2 border-black font-label text-sm font-bold">
+<span class="material-symbols-outlined text-primary" data-icon="token">token</span>
+                    WEB_GL
+                </div>
+<div class="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 border-2 border-black font-label text-sm font-bold">
+<span class="material-symbols-outlined text-secondary" data-icon="architecture">architecture</span>
+                    UI_ARCH
+                </div>
+<div class="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-4 py-2 border-2 border-black font-label text-sm font-bold">
+<span class="material-symbols-outlined text-tertiary" data-icon="database">database</span>
+                    ARCHIVE_SYSTEM
+                </div>
+</div>
+</div>
+</main>
+<!-- Contact Strip (The 3D Grid) -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 mb-24 section-trigger">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<a class="group flex flex-col items-center justify-center p-8 bg-white/90 backdrop-blur-sm border-4 border-double border-black isometric-offset hover:translate-y-[-8px] hover:bg-primary-container transition-all" href="mailto:archive@curator.xyz">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform" data-icon="mail">mail</span>
+<span class="font-label text-xs font-black uppercase tracking-widest">Email_Node</span>
+</a>
+<a class="group flex flex-col items-center justify-center p-8 bg-white/90 backdrop-blur-sm border-4 border-double border-black isometric-offset hover:translate-y-[-8px] hover:bg-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform" data-icon="link">link</span>
+<span class="font-label text-xs font-black uppercase tracking-widest">LinkedIn_Link</span>
+</a>
+<a class="group flex flex-col items-center justify-center p-8 bg-white/90 backdrop-blur-sm border-4 border-double border-black isometric-offset hover:translate-y-[-8px] hover:bg-tertiary-container transition-all" href="#">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform" data-icon="terminal">terminal</span>
+<span class="font-label text-xs font-black uppercase tracking-widest">Source_Code</span>
+</a>
+<a class="group flex flex-col items-center justify-center p-8 bg-white/90 backdrop-blur-sm border-4 border-double border-black isometric-offset hover:translate-y-[-8px] hover:bg-orange-100 transition-all" href="#">
+<span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform" data-icon="download">download</span>
+<span class="font-label text-xs font-black uppercase tracking-widest">Resume_V.01</span>
+</a>
+</div>
+</section>
+<!-- Footer -->
+
+</div>
+<script>
+    // 3D Background Systems
+    const scene = document.getElementById('atmospheric-scene');
+    const grid = document.getElementById('reactive-grid');
+    const particleContainer = document.getElementById('particle-container');
+
+    // Generate orbital particles
+    const createParticles = () => {
+        const count = 40;
+        const colors = ['#9c3f00', '#0846ed', '#812fc1', '#ff7a2f'];
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 6 + 2;
+            const orbitRadius = Math.random() * 600 + 100;
+            const duration = Math.random() * 40 + 20;
+            const delay = Math.random() * -40;
+            
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            p.style.left = '50%';
+            p.style.top = '50%';
+            p.style.setProperty('--particle-color', colors[Math.floor(Math.random() * colors.length)]);
+            p.style.setProperty('--orbit-radius', `${orbitRadius}px`);
+            p.style.animation = `orbital-particle ${duration}s linear infinite`;
+            p.style.animationDelay = `${delay}s`;
+            
+            particleContainer.appendChild(p);
+        }
+    };
+    createParticles();
+
+    // Intersection Observer for Spatial Transitions
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active', 'visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-step, .section-trigger').forEach(el => observer.observe(el));
+
+    // Interactive 3D Parallax Tilt & Grid Reaction
+    const tiltCard = document.getElementById('portrait-tilt');
+    
+    document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        
+        // Portrait Tilt
+        if (tiltCard) {
+            const rotateX = ((clientY / innerHeight) - 0.5) * 30; 
+            const rotateY = ((clientX / innerWidth) - 0.5) * -30; 
+            tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        // Grid Reaction
+        const moveX = ((clientX / innerWidth) - 0.5) * 20;
+        const moveY = ((clientY / innerHeight) - 0.5) * 20;
+        grid.style.transform = `rotateX(75deg) translateY(${moveY}px) translateX(${moveX}px)`;
+        
+        // Subtle Mouse Light Follow
+        const lights = document.querySelectorAll('.light-ray');
+        lights.forEach((light, idx) => {
+            const factor = (idx + 1) * 0.02;
+            light.style.transform = `translateX(calc(-50% + ${(clientX - innerWidth/2) * factor}px)) rotate(${15 + (clientX/innerWidth) * 5}deg)`;
+        });
+    });
+
+    // Reset on mouse leave
+    document.addEventListener('mouseleave', () => {
+        if (tiltCard) tiltCard.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        grid.style.transform = `rotateX(75deg) translateY(0) translateX(0)`;
+    });
+
+    // Sequence the hero reveal
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('hero-left').classList.add('active');
+        }, 300);
+        setTimeout(() => {
+            document.getElementById('hero-right').classList.add('active');
+        }, 600);
+    });
+</script>
+</body></html>

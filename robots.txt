@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abhilashgundelli.vercel.app/sitemap.xml

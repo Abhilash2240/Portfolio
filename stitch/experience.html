@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gundelli Abhilash // TECH_ARCHIVE_v1.0</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e3e8fa",
+                        "secondary": "#0060a8",
+                        "primary-container": "#ffdbce",
+                        "primary-fixed": "#ffdbce",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#edf0ff",
+                        "inverse-surface": "#2b303e",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#ffb59a",
+                        "on-primary-container": "#802a00",
+                        "tertiary": "#842bd2",
+                        "on-error": "#ffffff",
+                        "outline": "#926f63",
+                        "surface-variant": "#dde2f4",
+                        "on-secondary-container": "#004880",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-fixed-variant": "#802a00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "on-surface-variant": "#5d4035",
+                        "on-error-container": "#93000a",
+                        "primary": "#a73a00",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#f0dbff",
+                        "secondary-fixed": "#d2e4ff",
+                        "outline-variant": "#e7beaf",
+                        "on-primary-fixed": "#370e00",
+                        "surface-dim": "#d4daeb",
+                        "surface-container-low": "#f1f3ff",
+                        "on-surface": "#161c28",
+                        "tertiary-fixed-dim": "#ddb7ff",
+                        "secondary-container": "#d2e4ff",
+                        "on-tertiary-fixed": "#2c0051",
+                        "surface-container": "#e9edff",
+                        "background": "#f9f9ff",
+                        "secondary-fixed-dim": "#a1c9ff",
+                        "on-secondary-fixed": "#001c37",
+                        "error": "#ba1a1a",
+                        "on-background": "#161c28",
+                        "tertiary-fixed": "#f0dbff",
+                        "on-secondary-fixed-variant": "#004880",
+                        "surface-tint": "#a73a00",
+                        "surface-container-highest": "#dde2f4",
+                        "inverse-primary": "#ffb59a",
+                        "on-tertiary-container": "#6900b3",
+                        "on-tertiary-fixed-variant": "#6900b3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle, #0060a8 1.5px, transparent 1.5px);
+            background-size: 40px 40px;
+            opacity: 0.08;
+        }
+        .keycap-3d {
+            box-shadow: 4px 4px 0px 0px #161c28;
+            transition: all 0.1s ease;
+        }
+        .keycap-3d:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #161c28;
+        }
+        .perspective-container {
+            perspective: 2000px;
+        }
+        .isometric-card {
+            transform: rotateX(var(--tilt-x, 15deg)) rotateY(var(--tilt-y, -15deg)) rotateZ(var(--tilt-z, 5deg));
+            transition: transform 0.2s cubic-bezier(0.1, 0.5, 0.5, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .isometric-card:hover {
+            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.02);
+        }
+        .spotlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.25),
+                transparent 45%
+            );
+            z-index: 10;
+        }
+        .glow-line {
+            background: linear-gradient(to bottom, transparent, #0060a8, #842bd2, #a73a00, transparent);
+        }
+        .floating-3d-element {
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.1, 0.5, 0.5, 1);
+            z-index: 1;
+        }
+        #circuit-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 H 90 V 90 H 10 Z' fill='none' stroke='%230060a8' stroke-width='0.5'/%3E%3Ccircle cx='10' cy='10' r='1' fill='%23a73a00'/%3E%3Ccircle cx='90' cy='10' r='1' fill='%23842bd2'/%3E%3Cpath d='M50 0 V 20 M0 50 H 20' stroke='%230060a8' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(167, 58, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- Interactive Background Layers -->
+<div class="fixed inset-0 pointer-events-none z-0" id="dynamic-bg">
+<div class="grid-pattern absolute inset-0"></div>
+<div class="animate-pulse" id="circuit-overlay"></div>
+<div class="cursor-glow" id="mouse-glow"></div>
+<!-- Floating 3D Primitives (Rendered as SVGs for performance & control) -->
+<div class="floating-3d-element" style="top: 15%; left: 5%; --depth: 0.1;">
+<svg class="w-16 h-16 opacity-30 animate-spin" style="animation-duration: 12s;" viewbox="0 0 100 100">
+<rect fill="none" height="60" stroke="#0060a8" stroke-width="4" transform="rotate(45 50 50)" width="60" x="20" y="20"></rect>
+</svg>
+</div>
+<div class="floating-3d-element" style="top: 40%; right: 8%; --depth: 0.25;">
+<svg class="w-24 h-24 opacity-20" viewbox="0 0 100 100">
+<polygon class="animate-pulse" fill="none" points="50,15 90,85 10,85" stroke="#842bd2" stroke-width="2"></polygon>
+</svg>
+</div>
+<div class="floating-3d-element" style="bottom: 20%; left: 12%; --depth: 0.15;">
+<svg class="w-20 h-20 opacity-25 animate-bounce" style="animation-duration: 8s;" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="30" stroke="#a73a00" stroke-dasharray="10 5" stroke-width="3"></circle>
+</svg>
+</div>
+<div class="floating-3d-element" style="top: 70%; right: 20%; --depth: 0.05;">
+<div class="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-20 rotate-45"></div>
+</div>
+</div>
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 w-full bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl border-b-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+<div class="text-2xl font-black italic tracking-tighter text-orange-600 dark:text-orange-500 font-headline uppercase">
+            TECH_ARCHIVE_v1.0
+        </div>
+
+<div class="flex items-center gap-4">
+<div class="hidden lg:block relative">
+<input class="bg-surface-container-high border-2 border-on-surface rounded-none px-4 py-1 font-mono text-xs focus:outline-none focus:ring-0 focus:border-primary transition-all" placeholder="QUERY_SYSTEM..." type="text"/>
+<span class="absolute right-3 top-1.5 material-symbols-outlined text-sm">search</span>
+</div>
+<button class="keycap-3d bg-primary text-on-primary px-6 py-2 font-headline font-bold text-sm tracking-tighter uppercase border-2 border-on-surface">
+                CONNECT
+            </button>
+</div>
+</header>
+<main class="relative min-h-screen">
+<!-- Hero Section -->
+<section class="relative z-10 px-6 py-20 flex flex-col items-center justify-center overflow-hidden">
+<div class="max-w-4xl w-full text-center space-y-6 parallax-layer" data-depth="0.1">
+<div class="inline-block px-3 py-1 bg-tertiary text-on-tertiary font-mono text-[10px] uppercase tracking-[0.3em] mb-4 shadow-[2px_2px_0px_0px_#161c28]">
+                    SYSTEM_ACCESS: GRANTED
+                </div>
+<h1 class="font-headline text-6xl md:text-8xl font-black text-on-surface leading-none tracking-tighter uppercase">
+                    Gundelli <span class="text-primary italic">Abhilash</span>
+</h1>
+<p class="font-body text-lg md:text-2xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                    Full-Stack Architect &amp; 3D Web Visionary. Archiving digital experiences through tactical engineering and tactile interfaces.
+                </p>
+<div class="flex justify-center gap-4 pt-8">
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-mono text-secondary mb-2 uppercase tracking-widest">DEPLOYMENTS</span>
+<div class="text-4xl font-headline font-bold tracking-tighter">124+</div>
+</div>
+<div class="w-px h-12 bg-on-surface/10 mx-4"></div>
+<div class="flex flex-col items-center">
+<span class="text-[10px] font-mono text-tertiary mb-2 uppercase tracking-widest">ARCHITECTURE</span>
+<div class="text-4xl font-headline font-bold tracking-tighter">07</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Vertical Timeline Section -->
+<section class="relative z-10 px-6 py-20 max-w-6xl mx-auto flex perspective-container" id="timeline-section">
+<!-- Central Axis -->
+<div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 flex flex-col items-center">
+<div class="w-2 h-full glow-line opacity-30"></div>
+<div class="sticky top-1/2 -mt-4 w-8 h-8 bg-surface border-4 border-primary rounded-none rotate-45 z-20 flex items-center justify-center">
+<div class="w-2 h-2 bg-primary animate-ping"></div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="w-full space-y-32 relative">
+<!-- Timeline Item 1 -->
+<div class="flex flex-col md:flex-row items-center w-full group">
+<div class="w-full md:w-1/2 md:pr-16 order-2 md:order-1">
+<div class="isometric-card bg-surface-container-lowest border-2 border-on-surface p-8 keycap-3d relative experience-card">
+<div class="spotlight"></div>
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-secondary text-on-secondary flex items-center justify-center font-headline font-black text-xl border-2 border-on-surface z-20">01</div>
+<span class="font-mono text-[10px] text-tertiary uppercase tracking-widest relative z-20">2023 - PRESENT</span>
+<h3 class="font-headline text-3xl font-bold mt-2 mb-4 tracking-tighter relative z-20">LEAD SYSTEMS ARCHITECT</h3>
+<p class="text-on-surface-variant font-body leading-relaxed mb-6 relative z-20">
+                                Pioneering the integration of WebGL and React Three Fiber for next-gen data visualization platforms. Focused on high-performance infrastructure and spatial UI design.
+                            </p>
+<div class="flex flex-wrap gap-2 relative z-20">
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">R3F</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">Next.js</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">PostgreSQL</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center md:justify-start md:pl-16 order-1 md:order-2 mb-8 md:mb-0">
+<div class="relative w-48 h-48 group">
+<img alt="3d mesh visualization" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all border-4 border-on-surface shadow-[8px_8px_0px_0px_#0060a8]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWUL0ogJwJuhay8X7jHbz7u-KJxB2Ja5uIN7on0QzO0m6wu680IzkXMnBHZCUvEkUMNCH7Zv_OVA1TkGWqOihnSFDq73b0idHryiO-o0MBdqOqn6zw8Qg1GWxx9MdCi4YYs9j0EkkKO2ctdiOVr53x097YSbb_Z7AThV8S83LfZYks14o7841-O_7ExaMDMOYCvBdI-EtJ-RwHBHtTBRlEi79Gc3hbmhu_3Ws4QcKK2LwCc9_QXvkLlmfkZ1mmqbcjoYc1PTfJNT_Y"/>
+<div class="absolute inset-0 bg-secondary/20 mix-blend-multiply pointer-events-none"></div>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex flex-col md:flex-row items-center w-full group">
+<div class="w-full md:w-1/2 flex justify-center md:justify-end md:pr-16 mb-8 md:mb-0">
+<div class="relative w-64 h-40 group">
+<img alt="circuit board tech" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all border-4 border-on-surface shadow-[-8px_8px_0px_0px_#a73a00]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpEuQRwwjT8NzOXcdZXVaNDwbIZObXa8HME89cV5Jbf_oTS1TmSfMn_rmVW9uVzeOLjW5F7J-yuX_cHpR-YthBQs0USKx7BrbxJqIOgxuwKVYFd7SBllNgmuZy0N6rfJuQMWYkRqVsFFz99fScc2N89Qgz1wEurxoIQgApzNb13kC0u7y4IDPUR9oWJjXWAmUJ08PdbBI_2jm8n8hGw-R3s6tni-lpLIWFnBthqfUDuj1z4q9N-dGzHCGOUCjUpIRRE2Ss8H3rZBMH"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply pointer-events-none"></div>
+</div>
+</div>
+<div class="w-full md:w-1/2 md:pl-16">
+<div class="isometric-card bg-surface-container-lowest border-2 border-on-surface p-8 keycap-3d relative experience-card" style="--tilt-y: 15deg; --tilt-z: -5deg;">
+<div class="spotlight"></div>
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-primary text-on-primary flex items-center justify-center font-headline font-black text-xl border-2 border-on-surface z-20">02</div>
+<span class="font-mono text-[10px] text-secondary uppercase tracking-widest relative z-20">2021 - 2023</span>
+<h3 class="font-headline text-3xl font-bold mt-2 mb-4 tracking-tighter relative z-20">SENIOR FRONTEND ENGINEER</h3>
+<p class="text-on-surface-variant font-body leading-relaxed mb-6 relative z-20">
+                                Developed a proprietary design system used across 14 enterprise-scale applications. Optimized rendering pipelines for real-time analytics dashboards.
+                            </p>
+<div class="flex flex-wrap gap-2 relative z-20">
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">TypeScript</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">D3.js</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">Tailwind</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex flex-col md:flex-row items-center w-full group">
+<div class="w-full md:w-1/2 md:pr-16 order-2 md:order-1">
+<div class="isometric-card bg-surface-container-lowest border-2 border-on-surface p-8 keycap-3d relative experience-card">
+<div class="spotlight"></div>
+<div class="absolute -top-4 -left-4 w-12 h-12 bg-tertiary text-on-tertiary flex items-center justify-center font-headline font-black text-xl border-2 border-on-surface z-20">03</div>
+<span class="font-mono text-[10px] text-primary uppercase tracking-widest relative z-20">2019 - 2021</span>
+<h3 class="font-headline text-3xl font-bold mt-2 mb-4 tracking-tighter relative z-20">FULL STACK DEVELOPER</h3>
+<p class="text-on-surface-variant font-body leading-relaxed mb-6 relative z-20">
+                                Built scalable microservices for a fintech startup handling over 2M transactions monthly. Championed the migration from monolithic to serverless architecture.
+                            </p>
+<div class="flex flex-wrap gap-2 relative z-20">
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">Go</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">AWS</span>
+<span class="px-2 py-1 bg-surface-container-high border border-on-surface text-[10px] font-mono uppercase">Docker</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center md:justify-start md:pl-16 order-1 md:order-2 mb-8 md:mb-0">
+<div class="relative w-40 h-56 group">
+<img alt="global network visualization" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all border-4 border-on-surface shadow-[8px_8px_0px_0px_#842bd2]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApMIImtYwher6bPjauMG_3CH8UlQ_MaqSFVjERRbOcVA6gt_BaNYOrxpGVrWimzxIVVGWXxTH-HfPVPcLrlkqsWqJFlTIw0giYlaUYcDuxdpc2kqx07fTlODNJJFQvFmjSaOUS4o0Q99JNir0fPJljVZpENu7YmjPF0uzU_PAkrF_tl3OusAY-5pk31v5r6uxt92rCIjjIr9nC4c5XApBgoSLqdR3a1um2_hC3CHVN3XkR6vz34Qy6ZEGMykJsi2_jUFT4Ww9Hcd1x"/>
+<div class="absolute inset-0 bg-tertiary/20 mix-blend-multiply pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Nodes / Skills -->
+<section class="relative z-10 px-6 py-32 bg-surface-container-low border-y-8 border-double border-stone-300">
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">developer_mode_tv</span>
+<h4 class="font-headline text-2xl font-black uppercase tracking-tighter">CORE_STACK</h4>
+</div>
+<div class="p-6 bg-surface-container-lowest border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group">
+<div class="spotlight"></div>
+<ul class="font-mono text-xs space-y-3 relative z-10">
+<li class="flex justify-between items-center"><span class="text-secondary">#01</span> <span>TYPESCRIPT</span></li>
+<li class="flex justify-between items-center"><span class="text-secondary">#02</span> <span>RUST_WASM</span></li>
+<li class="flex justify-between items-center"><span class="text-secondary">#03</span> <span>GRAPHQL</span></li>
+<li class="flex justify-between items-center"><span class="text-secondary">#04</span> <span>KUBERNETES</span></li>
+</ul>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-secondary" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
+<h4 class="font-headline text-2xl font-black uppercase tracking-tighter">ENGINEERING</h4>
+</div>
+<div class="p-6 bg-surface-container-lowest border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group">
+<div class="spotlight"></div>
+<ul class="font-mono text-xs space-y-3 relative z-10">
+<li class="flex justify-between items-center"><span class="text-primary">#01</span> <span>DISTRIBUTED_SYSTEMS</span></li>
+<li class="flex justify-between items-center"><span class="text-primary">#02</span> <span>CI_CD_PIPELINES</span></li>
+<li class="flex justify-between items-center"><span class="text-primary">#03</span> <span>PERFORMANCE_AUDITS</span></li>
+<li class="flex justify-between items-center"><span class="text-primary">#04</span> <span>CYBER_SECURITY</span></li>
+</ul>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-tertiary" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+<h4 class="font-headline text-2xl font-black uppercase tracking-tighter">CREATIVE</h4>
+</div>
+<div class="p-6 bg-surface-container-lowest border-2 border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden group">
+<div class="spotlight"></div>
+<ul class="font-mono text-xs space-y-3 relative z-10">
+<li class="flex justify-between items-center"><span class="text-tertiary">#01</span> <span>THREE_JS</span></li>
+<li class="flex justify-between items-center"><span class="text-tertiary">#02</span> <span>SHADERS_GLSL</span></li>
+<li class="flex justify-between items-center"><span class="text-tertiary">#03</span> <span>UI_MOTION_UX</span></li>
+<li class="flex justify-between items-center"><span class="text-tertiary">#04</span> <span>BLENDER_MODELING</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA / Contact -->
+<section class="relative z-10 px-6 py-40 flex flex-col items-center">
+<div class="relative max-w-4xl w-full p-12 bg-on-surface text-surface border-4 border-primary shadow-[12px_12px_0px_0px_#a73a00] overflow-hidden group">
+<div class="absolute -right-10 -bottom-10 w-64 h-64 bg-primary opacity-20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+<div class="relative z-10 space-y-8">
+<h2 class="font-headline text-5xl md:text-7xl font-black tracking-tighter uppercase leading-none">Ready to initialize <br/><span class="text-primary">project_alpha?</span></h2>
+<p class="font-mono text-sm text-surface-dim opacity-70 max-w-xl">
+                        Accepting high-impact collaborations and architectural consultations. Establish a handshake through the terminal.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-6">
+<button class="bg-primary text-on-primary px-8 py-4 font-headline font-black text-xl uppercase tracking-tighter border-2 border-on-primary hover:bg-on-primary hover:text-primary transition-all">
+                            ESTABLISH_UPLINK
+                        </button>
+<button class="bg-transparent text-surface px-8 py-4 font-headline font-black text-xl uppercase tracking-tighter border-2 border-surface hover:bg-surface hover:text-on-surface transition-all">
+                            DOWNLOAD_SPEC.PDF
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+
+<script>
+        const mouseGlow = document.getElementById('mouse-glow');
+        const circuitOverlay = document.getElementById('circuit-overlay');
+        const floatingElements = document.querySelectorAll('.floating-3d-element');
+        const timeline = document.getElementById('timeline-section');
+        const isometricCards = document.querySelectorAll('.isometric-card');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Cursor Glow Position
+            mouseGlow.style.left = `${x}px`;
+            mouseGlow.style.top = `${y}px`;
+
+            // Circuit Overlay Proximity Pulse
+            const distFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+            const opacity = 0.1 + (0.2 * (1 - Math.min(distFromCenter / 1000, 1)));
+            circuitOverlay.style.opacity = opacity;
+
+            // Global Parallax for Floating Primitives
+            floatingElements.forEach(el => {
+                const depth = parseFloat(el.getAttribute('style').match(/--depth:\s*([\d.]+)/)[1]);
+                const moveX = (x - centerX) * depth;
+                const moveY = (y - centerY) * depth;
+                el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+
+            // Timeline & Card Tilting
+            const tiltFactor = 5;
+            const tiltX = (y - centerY) / centerY * tiltFactor;
+            const tiltY = (x - centerX) / centerX * -tiltFactor;
+
+            isometricCards.forEach(card => {
+                // Get original base rotations if they exist
+                const style = card.getAttribute('style') || "";
+                const baseZ = style.includes('--tilt-z') ? card.style.getPropertyValue('--tilt-z') : '5deg';
+                
+                card.style.setProperty('--tilt-x', `${15 + tiltX}deg`);
+                card.style.setProperty('--tilt-y', `${-15 + tiltY}deg`);
+            });
+
+            // Tile/Card Spotlight Tracking
+            const interactiveElements = document.querySelectorAll('.experience-card, .group');
+            interactiveElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const cardX = x - rect.left;
+                const cardY = y - rect.top;
+                el.style.setProperty('--mouse-x', `${cardX}px`);
+                el.style.setProperty('--mouse-y', `${cardY}px`);
+            });
+        });
+
+        // Initial setup for spotlight
+        window.addEventListener('load', () => {
+            document.documentElement.style.setProperty('--mouse-x', '50%');
+            document.documentElement.style.setProperty('--mouse-y', '50%');
+        });
+    </script>
+</body></html>
