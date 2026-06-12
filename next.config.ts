@@ -1,12 +1,13 @@
 import type { NextConfig } from 'next'
 
+const isGithubPages = process.env.GITHUB_PAGES === 'true'
 const repoName = '/Portfolio'
 
 const nextConfig: NextConfig = {
-  // Export as static site for GitHub Pages
+  // Export as static site for GitHub Pages when requested by env
   output: 'export',
-  basePath: repoName,
-  assetPrefix: repoName,
+  basePath: isGithubPages ? repoName : undefined,
+  assetPrefix: isGithubPages ? repoName : undefined,
   // Ensure pages are emitted as folders with index.html
   trailingSlash: true,
 

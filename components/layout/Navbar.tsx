@@ -252,7 +252,6 @@ export default function Navbar() {
               padding:    '0',
               minWidth:   'var(--touch-target-min)',
               minHeight:  'var(--touch-target-min)',
-              display:    'none',
             }}
           >
             <span style={{

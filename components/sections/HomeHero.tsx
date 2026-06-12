@@ -18,14 +18,7 @@ export default function HomeHero() {
       }}
     >
       <div
-        style={{
-          width: '100%',
-          maxWidth: '1320px',
-          display: 'grid',
-          gap: '3rem',
-          alignItems: 'center',
-          gridTemplateColumns: 'minmax(0, 1.2fr) minmax(320px, 0.8fr)',
-        }}
+        className="home-hero-grid"
       >
         <section style={{ display: 'grid', gap: '2rem' }}>
           <div
@@ -107,17 +100,7 @@ export default function HomeHero() {
         </section>
 
         <aside
-          style={{
-            position: 'relative',
-            overflow: 'hidden',
-            borderRadius: '2rem',
-            border: '2px solid black',
-            backgroundColor: 'var(--color-surface)',
-            padding: '2rem',
-            minHeight: '520px',
-            display: 'grid',
-            placeItems: 'center',
-          }}
+          className="home-hero-panel"
         >
           <div style={{ position: 'absolute', inset: 0, opacity: 0.15, backgroundImage: 'radial-gradient(circle at top left, rgba(8,70,237,0.2), transparent 30%), radial-gradient(circle at bottom right, rgba(210,153,255,0.15), transparent 35%)' }} />
           <div style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '420px' }}>
