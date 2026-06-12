@@ -1,3 +1,5 @@
+export const dynamic = 'force-static'
+
 import { MetadataRoute } from 'next'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://abhilashgundelli.vercel.app'
