@@ -1,0 +1,826 @@
+@import "tailwindcss";
+
+/* ── CSS Custom Properties from Stitch Design Tokens ─────────────────────── */
+:root {
+  /* Colors */
+  --color-white: #FFFFFF;
+  --color-parchment: #F6F6F6;
+  --color-ink: #2D2F2F;
+  --color-aged-gold: #9C3F00;
+  --color-vintage-green: #0060A8;
+  --color-prussian-blue: #0846ED;
+  --color-stamp-red: #812FC1;
+  --color-surface-low: #F0F1F1;
+  --color-surface: #E7E8E8;
+  --color-surface-high: #E1E3E3;
+  --color-surface-highest: #DBDDDD;
+  --color-surface-dim: #D2D5D5;
+  --color-error: #B42318;
+  --color-error-container: #FFDAD6;
+  --color-outline: #757777;
+  --color-outline-variant: #ACADAD;
+  --color-text-muted: #6B6B6B;
+  --color-form-label: #5A5A5A;
+  --color-focus-ring: #9C3F00;
+  --color-background: #F6F6F6;
+  --color-surface-bright: #F6F6F6;
+  --color-on-background: #2D2F2F;
+  --color-on-surface: #2D2F2F;
+  --color-on-surface-variant: #5A5C5C;
+  --color-secondary-container: #C7CFFF;
+  --color-background-secondary: #E8F0FF;
+  --color-tertiary-container: #D299FF;
+
+  /* Typography */
+  --font-display: 'Newsreader', serif;
+  --font-serif: 'Newsreader', serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Grotesk', sans-serif;
+  --font-label: 'Space Grotesk', sans-serif;
+
+  /* Type scale */
+  --text-display-lg: clamp(3.5rem, 8vw, 9rem);
+  --text-display-md: clamp(2.5rem, 5vw, 4.5rem);
+  --text-heading-xl: clamp(2rem, 4vw, 3.5rem);
+  --text-heading-lg: 2rem;
+  --text-heading-md: 1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.9rem;
+  --text-body-xs: 0.75rem;
+  --text-label-xs: 0.75rem;
+  --leading-display-lg: 0.85;
+  --leading-display-md: 1.05;
+  --leading-heading-xl: 1.1;
+  --leading-heading-lg: 1.2;
+  --leading-heading-md: 1.25;
+  --leading-body-lg: 1.8;
+  --leading-body-md: 1.7;
+  --leading-body-sm: 1.6;
+  --leading-body-xs: 1.4;
+  --leading-mono-sm: 1.4;
+  --leading-mono-xs: 1.4;
+  --tracking-display-lg: -0.04em;
+  --tracking-display-md: -0.02em;
+  --tracking-heading-xl: -0.01em;
+  --tracking-heading-lg: -0.01em;
+  --tracking-heading-md: -0.005em;
+  --tracking-body: 0;
+  --tracking-caption: 0.04em;
+  --tracking-mono-sm: 0.05em;
+  --tracking-mono-xs: 0.08em;
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.22, 1.2, 0.36, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-stamp: cubic-bezier(0.0, 0.9, 0.57, 1.0);
+  --ease-ink: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Duration */
+  --dur-instant: 0ms;
+  --dur-xfast: 100ms;
+  --dur-fast: 150ms;
+  --dur-normal: 300ms;
+  --dur-slow: 500ms;
+  --dur-slower: 700ms;
+  --dur-xslow: 800ms;
+  --dur-xl: 1000ms;
+  --dur-xxl: 1500ms;
+  --dur-entry: 1800ms;
+  --dur-loop: 2000ms;
+  --dur-ambient: 3000ms;
+  --dur-ring: 18000ms;
+  --dur-ring-outer: 30000ms;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-neo-sm: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-md: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-neo-lg: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+  --shadow-glow-blue: 0 0 30px rgba(8, 70, 237, 0.8);
+  --shadow-glow-orange: 0 0 30px rgba(156, 63, 0, 0.8);
+  --shadow-ambient: 0 12px 24px rgba(26, 18, 8, 0.05);
+
+  /* Accessibility */
+  --touch-target-min: 44px;
+
+  /* Breakpoints (reference only) */
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1440px;
+
+  /* Type scale */
+  --text-display-lg: clamp(3.5rem, 8vw, 9rem);
+  --text-display-md: clamp(2.5rem, 5vw, 4.5rem);
+  --text-heading-xl: clamp(2rem, 4vw, 3.5rem);
+  --text-heading-lg: 2rem;
+  --text-heading-md: 1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.9rem;
+  --text-body-xs: 0.75rem;
+}
+
+/* ── Base Reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  border-radius: 0 !important; /* STITCH: strict no border-radius */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+section[id] {
+  scroll-margin-top: 64px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  background-color: var(--color-parchment);
+  background: radial-gradient(circle at center, #FBFCFC 0%, var(--color-surface) 100%);
+  color: var(--color-ink);
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-120%);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
+  z-index: 999;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid var(--color-aged-gold);
+}
+
+html,
+body,
+main,
+section {
+  scroll-snap-type: none !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+  overscroll-behavior-y: auto;
+}
+
+nav,
+main,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+.stitch-shell-main {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.stitch-frame-wrap {
+  width: 100%;
+}
+
+/* Stitch HTML content rendered inline */
+.stitch-page-content {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Remove internal nav/footer padding from stitch pages since we have our own */
+.stitch-page-content nav {
+  display: none !important;
+}
+
+.stitch-page-content footer {
+  display: none !important;
+}
+
+/* Ensure stitch page body-level classes still work */
+.stitch-page-content > .stitch-injected-content > main,
+.stitch-page-content > .stitch-injected-content > [class*="pt-"] {
+  padding-top: var(--space-8) !important;
+}
+
+.stitch-skeleton-block {
+  animation: shimmer 1.8s infinite ease-in-out;
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+#stitch-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stitch-grid {
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  bottom: -55%;
+  left: -100%;
+  background-image:
+    linear-gradient(rgba(156, 63, 0, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(156, 63, 0, 0.14) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: rotateX(75deg) translateY(0);
+}
+
+.stitch-light-ray {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.42) 0%, transparent 80%);
+  filter: blur(40px);
+  opacity: 0.45;
+}
+
+.stitch-light-ray-a {
+  left: 50%;
+  transform: translateX(-50%) rotate(14deg);
+}
+
+.stitch-light-ray-b {
+  left: 22%;
+  transform: rotate(-10deg);
+  opacity: 0.3;
+}
+
+.stitch-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.26;
+}
+
+.stitch-glow-orange {
+  width: 320px;
+  height: 320px;
+  top: 12%;
+  right: -80px;
+  background: radial-gradient(circle, rgba(156, 63, 0, 0.6) 0%, transparent 70%);
+}
+
+.stitch-glow-blue {
+  width: 360px;
+  height: 360px;
+  bottom: 10%;
+  left: -100px;
+  background: radial-gradient(circle, rgba(8, 70, 237, 0.55) 0%, transparent 70%);
+}
+
+.stitch-glow-purple {
+  width: 280px;
+  height: 280px;
+  top: 52%;
+  right: 20%;
+  background: radial-gradient(circle, rgba(129, 47, 193, 0.5) 0%, transparent 70%);
+}
+
+/* ── Custom Gold Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-aged-gold);
+  border-radius: 0;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-aged-gold) transparent;
+}
+
+/* ── Typography Utilities ─────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.font-display-md {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: 1.7;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+}
+
+.font-label {
+  font-family: var(--font-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--text-label-xs);
+}
+
+/* ── Ornament & Divider ────────────────────────────────────────────────────── */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--color-aged-gold);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+  margin: var(--space-8) 0;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-aged-gold);
+  opacity: 0.4;
+}
+
+/* Double-rule border (Stitch spec: 4px total, two lines with gap) */
+.double-rule-top {
+  border-top: 3px double var(--color-aged-gold);
+}
+.double-rule-bottom {
+  border-bottom: 3px double var(--color-aged-gold);
+}
+.double-rule-all {
+  border: 3px double var(--color-aged-gold);
+}
+
+/* ── Ink Stamp Chip ───────────────────────────────────────────────────────── */
+.stamp-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid currentColor;
+  font-family: var(--font-mono);
+  font-size: var(--text-body-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  position: relative;
+}
+.stamp-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0.07;
+}
+
+/* ── Focus Ring ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+button,
+a[href],
+input,
+textarea,
+select {
+  min-height: var(--touch-target-min);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+label,
+caption {
+  font-size: clamp(0.75rem, 2vw, 0.8rem);
+  color: var(--color-form-label);
+}
+
+.page-section {
+  padding-block: var(--space-16);
+  padding-inline: var(--space-4);
+}
+
+/* ── Page transition overlay ─────────────────────────────────────────────── */
+.page-wrapper {
+  min-height: 100vh;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes spinRingReverse {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+
+@keyframes counterRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes stampSlam {
+  0%   { transform: scaleY(0) translateY(-100%); opacity: 0; }
+  80%  { transform: scaleY(1.05) translateY(0); opacity: 1; }
+  100% { transform: scaleY(1) translateY(0); opacity: 1; }
+}
+
+@keyframes inkFill {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes sealSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes morseFlash {
+  0%    { opacity: 0; }
+  20%   { opacity: 1; }
+  35%   { opacity: 0; }
+  50%   { opacity: 1; }
+  65%   { opacity: 0; }
+  100%  { opacity: 1; }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stitch-grid {
+    animation: stitchGridDrift 20s linear infinite;
+  }
+
+  .stitch-glow {
+    animation: stitchGlowFloat 8s ease-in-out infinite alternate;
+  }
+
+  .stitch-glow-blue {
+    animation-delay: -2s;
+  }
+
+  .stitch-glow-purple {
+    animation-delay: -4s;
+  }
+
+  .glow-blue {
+    animation: pulseGlowBlue 3s infinite ease-in-out;
+  }
+
+  .glow-orange {
+    animation: pulseGlowOrange 3s infinite ease-in-out;
+  }
+
+  @keyframes stitchGridDrift {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 80px 140px, 80px 140px; }
+  }
+
+  @keyframes stitchGlowFloat {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(0, -20px, 0) scale(1.08); }
+  }
+}
+
+/* ── Reduced Motion ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .spin-ring,
+  .counter-ring {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .stitch-grid,
+  .stitch-glow,
+  .stitch-light-ray,
+  .glow-blue,
+  .glow-orange {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1,
+  h2,
+  h3,
+  .font-display,
+  .font-display-md {
+    letter-spacing: -0.01em !important;
+  }
+
+  h1,
+  .font-display {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+  }
+
+  h2,
+  .font-display-md {
+    font-size: clamp(1.5rem, 7vw, 2.25rem) !important;
+  }
+
+  .font-label,
+  label,
+  caption,
+  .stamp-chip,
+  .ornament-divider {
+    letter-spacing: 0.04em !important;
+  }
+
+  .page-section {
+    padding-block: var(--space-12);
+  }
+}
+
+/* ── Stitch Visual Shells ────────────────────────────────────────────────── */
+.isometric-grid-bg {
+  background-image:
+    linear-gradient(30deg, rgba(207, 197, 187, 0.35) 12%, transparent 12.5%, transparent 87%, rgba(207, 197, 187, 0.35) 87.5%),
+    linear-gradient(150deg, rgba(207, 197, 187, 0.35) 12%, transparent 12.5%, transparent 87%, rgba(207, 197, 187, 0.35) 87.5%),
+    linear-gradient(60deg, rgba(231, 226, 216, 0.45) 25%, transparent 25.5%, transparent 75%, rgba(231, 226, 216, 0.45) 75%);
+  background-size: 80px 140px;
+  background-position: 0 0, 40px 70px, 0 0;
+}
+
+.blueprint-bg {
+  background-color: var(--color-surface-low);
+  background-image:
+    linear-gradient(rgba(27, 58, 107, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 58, 107, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.keycap-3d {
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--shadow-neo-md);
+  transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.keycap-3d:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
+}
+
+.keycap-3d:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+}
+
+.panel-shell {
+  border: 2px solid var(--color-ink);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-neo-md);
+}
+
+.lift-hover {
+  transition: transform var(--dur-normal) var(--ease-standard), box-shadow var(--dur-normal) var(--ease-standard);
+}
+
+.lift-hover:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-neo-lg);
+}
+
+/* ── Ink wash button (hover fill left-to-right) ──────────────────────────── */
+.ink-wash-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: 1px solid var(--color-ink);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: transparent;
+  cursor: pointer;
+  transition: color var(--dur-slow) var(--ease-standard);
+}
+
+.ink-wash-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-aged-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-standard);
+  z-index: -1;
+}
+
+.ink-wash-btn:hover::before,
+.ink-wash-btn:focus-visible::before {
+  transform: scaleX(1);
+}
+
+/* ── Pull-quote styling ──────────────────────────────────────────────────── */
+.pull-quote {
+  padding: 1.5rem 2rem;
+  border-left: 3px double var(--color-aged-gold);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  line-height: 1.6;
+  background: var(--color-surface-low);
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-aged-gold);
+  color: var(--color-ink);
+}
+
+/* ── Stitch Motion Runtime Classes ───────────────────────────────────────── */
+#custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-ink);
+  background: var(--color-white);
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 220ms var(--ease-standard), height 220ms var(--ease-standard), border-radius 220ms var(--ease-standard);
+}
+
+#custom-cursor.cursor-large {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+}
+
+.cursor-trail {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--color-stamp-red);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.6;
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+}
+
+.perspective-stage {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+.isometric-card {
+  transform: rotateX(10deg) rotateY(-12deg);
+  transform-style: preserve-3d;
+  transition: transform 600ms var(--ease-spring), box-shadow 300ms var(--ease-standard);
+}
+
+.isometric-card:hover {
+  transform: rotateX(0deg) rotateY(0deg) translateZ(36px);
+}
+
+.magnetic {
+  transition: transform 300ms var(--ease-spring);
+}
+
+.section-trigger {
+  opacity: 0;
+  transform: translateY(64px);
+  transition: opacity 900ms var(--ease-spring), transform 900ms var(--ease-spring);
+}
+
+.section-trigger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-step {
+  opacity: 0;
+  transform: translateY(26px) scale(0.98);
+  transition: opacity 800ms var(--ease-spring), transform 800ms var(--ease-spring);
+}
+
+.reveal-step.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.glow-blue {
+  animation: none;
+}
+
+.glow-orange {
+  animation: none;
+}
+
+@keyframes pulseGlowBlue {
+  0%, 100% { box-shadow: var(--shadow-neo-md), 0 0 15px rgba(27, 58, 107, 0.35); }
+  50% { box-shadow: var(--shadow-neo-md), 0 0 30px rgba(27, 58, 107, 0.75); }
+}
+
+@keyframes pulseGlowOrange {
+  0%, 100% { box-shadow: var(--shadow-neo-md), 0 0 15px rgba(166, 50, 40, 0.35); }
+  50% { box-shadow: var(--shadow-neo-md), 0 0 30px rgba(166, 50, 40, 0.75); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #custom-cursor,
+  .cursor-trail {
+    display: none !important;
+  }
+
+  .isometric-card,
+  .isometric-card:hover,
+  .magnetic,
+  .section-trigger,
+  .section-trigger.visible,
+  .reveal-step,
+  .reveal-step.active {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

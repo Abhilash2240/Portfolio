@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Grotesk:wght@300..700&amp;family=Special+Elite&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f6f6f6",
+                        "secondary-fixed-dim": "#b5c0ff",
+                        "on-tertiary-fixed-variant": "#580091",
+                        "secondary": "#0846ed",
+                        "secondary-dim": "#003cd3",
+                        "surface-variant": "#dbdddd",
+                        "on-tertiary": "#fceeff",
+                        "tertiary-fixed-dim": "#c986ff",
+                        "on-primary-container": "#401500",
+                        "on-surface": "#2d2f2f",
+                        "primary-fixed": "#ff7a2f",
+                        "on-secondary-container": "#0035bf",
+                        "error-dim": "#b92902",
+                        "primary-fixed-dim": "#f66700",
+                        "tertiary-dim": "#741eb4",
+                        "surface-container": "#e7e8e8",
+                        "on-background": "#2d2f2f",
+                        "primary": "#9c3f00",
+                        "surface-tint": "#9c3f00",
+                        "on-tertiary-fixed": "#280046",
+                        "on-secondary-fixed-variant": "#003cd6",
+                        "primary-container": "#ff7a2f",
+                        "surface-bright": "#f6f6f6",
+                        "inverse-primary": "#fe6b00",
+                        "surface-container-high": "#e1e3e3",
+                        "on-secondary": "#f2f1ff",
+                        "tertiary-container": "#d299ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0c0f0f",
+                        "on-tertiary-container": "#4c007d",
+                        "on-primary-fixed-variant": "#4f1c00",
+                        "on-error": "#ffefec",
+                        "outline": "#757777",
+                        "primary-dim": "#893600",
+                        "on-secondary-fixed": "#002691",
+                        "tertiary": "#812fc1",
+                        "surface-container-highest": "#dbdddd",
+                        "secondary-container": "#c7cfff",
+                        "outline-variant": "#acadad",
+                        "inverse-on-surface": "#9c9d9d",
+                        "on-primary-fixed": "#000000",
+                        "tertiary-fixed": "#d299ff",
+                        "surface-dim": "#d2d5d5",
+                        "on-error-container": "#520c00",
+                        "secondary-fixed": "#c7cfff",
+                        "surface-container-low": "#f0f1f1",
+                        "on-primary": "#fff0ea",
+                        "surface": "#f6f6f6",
+                        "error": "#b02500",
+                        "error-container": "#f95630",
+                        "on-surface-variant": "#5a5c5c",
+                        "prussian-blue": "#003153"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Space Grotesk"],
+                        "label": ["Space Grotesk"],
+                        "newsreader": ["Newsreader"],
+                        "space-grotesk": ["Space Grotesk"],
+                        "special-elite": ["Special Elite"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .perspective-container {
+            perspective: 2500px;
+        }
+
+        /* Mechanical Unfold Base */
+        .unfold-container {
+            perspective: 2000px;
+            transform-style: preserve-3d;
+        }
+
+        .mechanical-panel {
+            transform-origin: top;
+            transform: scaleY(0) rotateX(-20deg) skewX(2deg);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+        }
+
+        .unfold-active .mechanical-panel {
+            transform: scaleY(1) rotateX(0deg) skewX(0deg);
+            opacity: 1;
+        }
+
+        /* 3D Letter Construction */
+        .letter-slam {
+            display: inline-block;
+            transform: translateZ(500px) scale(0) rotateX(90deg);
+            opacity: 0;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+        }
+
+        .unfold-active .letter-slam {
+            transform: translateZ(0) scale(1) rotateX(0deg);
+            opacity: 1;
+        }
+
+        /* Blueprint Grid */
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(rgba(0, 49, 83, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 49, 83, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            transition: background-size 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .unfold-active .blueprint-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(rgba(0, 49, 83, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 49, 83, 0.1) 1px, transparent 1px);
+        }
+
+        /* Holographic Glow */
+        .holographic-glow {
+            position: absolute;
+            inset: -20%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 49, 83, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        .unfold-active .holographic-glow {
+            opacity: 1;
+            animation: pulse-glow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.9); opacity: 0.1; }
+            100% { transform: scale(1.1); opacity: 0.25; }
+        }
+
+        /* 3D Title Parallax Tilt */
+        .parallax-title {
+            transform-style: preserve-3d;
+            transform: rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg));
+            transition: transform 0.1s ease-out;
+        }
+
+        .headline-3d {
+            text-shadow: 
+                1px 1px 0px #000,
+                2px 2px 0px #000,
+                3px 3px 0px #000,
+                4px 4px 0px #000,
+                5px 5px 0px #ff7a2f;
+        }
+
+        .book-flip {
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .book-flip:hover {
+            transform: rotateY(-35deg) rotateX(5deg);
+            z-index: 50;
+        }
+
+        .hover-lift-shadow {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+
+        .book-flip:hover .hover-lift-shadow {
+            transform: translateZ(30px);
+            box-shadow: 24px 24px 40px -10px rgba(0,0,0,0.3), 12px 12px 0px 0px var(--shadow-color, black);
+        }
+
+        .tech-tag {
+            opacity: 0;
+        }
+
+        .group:hover .tech-tag {
+            animation: stamp-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes stamp-in {
+            0% { transform: scale(3); opacity: 0; filter: blur(4px); }
+            70% { transform: scale(0.95); opacity: 1; filter: blur(0px); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-[100] flex justify-between items-center px-8 py-3 bg-white/40 dark:bg-stone-900/40 backdrop-blur-md rounded-sm border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,107,0,1)]">
+<div class="font-newsreader font-black text-2xl text-black dark:text-white italic">ABHILASH</div>
+
+<button class="bg-primary-fixed text-on-primary-fixed px-6 py-1.5 font-newsreader font-bold text-sm tracking-widest border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all uppercase">RESUME</button>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto overflow-x-hidden">
+<!-- Massive 3D Title Section with Mechanical Unfold -->
+<section class="mb-24 flex flex-col items-center justify-center text-center unfold-container relative min-h-[400px]" id="title-section">
+<div class="holographic-glow"></div>
+<!-- Panel 1: Archive / Catalog -->
+<div class="mechanical-panel blueprint-bg border-2 border-black p-4 w-full max-w-3xl bg-white shadow-sm z-30">
+<span class="font-special-elite text-secondary text-sm tracking-[0.5em] mb-4 uppercase block">Archive / Catalog</span>
+<!-- Panel 2: The Main Title -->
+<div class="mechanical-panel border-t-2 border-black pt-10 pb-12 bg-white/95 relative overflow-hidden" style="transition-delay: 0.2s;">
+<div class="parallax-title">
+<h1 class="font-newsreader font-black text-7xl md:text-9xl headline-3d italic tracking-tighter leading-none mb-4 inline-flex" id="construction-target">
+<span class="letter-slam" style="transition-delay: 0.8s;">P</span>
+<span class="letter-slam" style="transition-delay: 0.9s;">R</span>
+<span class="letter-slam" style="transition-delay: 1.0s;">O</span>
+<span class="letter-slam" style="transition-delay: 1.1s;">J</span>
+<span class="letter-slam" style="transition-delay: 1.2s;">E</span>
+<span class="letter-slam" style="transition-delay: 1.3s;">C</span>
+<span class="letter-slam" style="transition-delay: 1.4s;">T</span>
+<span class="letter-slam" style="transition-delay: 1.5s;">S</span>
+</h1>
+</div>
+<!-- Panel 3: Description -->
+<div class="mechanical-panel border-t-2 border-black mt-8 pt-8 pb-4 bg-white" style="transition-delay: 0.4s;">
+<div class="h-1 w-32 bg-on-surface mx-auto mb-6"></div>
+<p class="max-w-xl mx-auto font-body text-on-surface-variant text-lg px-4">
+                        A curated exhibition of architectural digital systems and kinetic prototypes. 
+                        <span class="font-special-elite text-xs block mt-2 opacity-50">INITIALIZING MECHANICAL ASSEMBLY... OK</span>
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Projects -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 perspective-container">
+<!-- Project Card 1: Kinetic Visualizer -->
+<div class="book-flip group relative" style="--shadow-color: rgba(8,70,237,1);">
+<div class="relative z-10 bg-white border-2 border-black p-1 hover-lift-shadow h-[500px] flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-secondary border-r border-black shadow-[inset_-2px_0px_4px_rgba(0,0,0,0.3)]"></div>
+<div class="pl-6 p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<span class="font-special-elite text-[10px] text-outline">REF: ARCH-001</span>
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div class="mb-6 h-48 bg-surface-container border-2 border-black overflow-hidden relative group-hover:bg-secondary-container transition-colors duration-500">
+<img alt="Kinetic digital architecture" class="w-full h-full object-cover mix-blend-multiply opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPpVIuWGbi4kBKUnN8V2scwnvAXzvAs3DJHGSesva1HN8D-YwVlInAKh65K0TNDPbWUs_9nMJfXFnIo5hnPjQ4WQj0cAicqnC8AVyanBG5woK77KquUIY6v6T6cxZBugLbjOgGuTZqvPk2pQktIOeKQExVZGt31vh6ACEVEGI0zYuQvzlGYk-0huHI9KYJNetNQUpFMHLUBf50OxIvYhjt-dpowvvnJb3_3J3F8HzUOJGDU5jJLjH0K9OIO4t4Ktml7FFz6kBYfAqY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<h3 class="font-newsreader font-black text-3xl mb-2 tracking-tight uppercase">KINETIC VISUALIZER</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">Interactive 3D engine built for spatial data mapping and real-time kinetic rendering in browser environments.</p>
+<div class="mt-auto flex gap-2 flex-wrap">
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.1s;">THREE.JS</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.2s;">WEBGL</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.3s;">GSAP</span>
+</div>
+</div>
+<div class="border-t-2 border-black p-4 flex justify-between items-center bg-surface-container-low">
+<span class="font-special-elite text-xs uppercase font-bold text-secondary">View Manuscript</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<div class="absolute top-[8px] -right-[12px] h-full w-[12px] bg-secondary-dim border-2 border-black skew-y-[45deg] z-0"></div>
+<div class="absolute -bottom-[12px] right-[4px] w-full h-[12px] bg-secondary border-2 border-black skew-x-[45deg] z-0"></div>
+</div>
+<!-- Project Card 2: Neural Grid -->
+<div class="book-flip group relative" style="--shadow-color: rgba(156,63,0,1);">
+<div class="relative z-10 bg-white border-2 border-black p-1 hover-lift-shadow h-[500px] flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-primary border-r border-black shadow-[inset_-2px_0px_4px_rgba(0,0,0,0.3)]"></div>
+<div class="pl-6 p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<span class="font-special-elite text-[10px] text-outline">REF: DATA-402</span>
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<div class="mb-6 h-48 bg-surface-container border-2 border-black overflow-hidden relative group-hover:bg-primary-container transition-colors duration-500">
+<img alt="Neural grid motherboard" class="w-full h-full object-cover mix-blend-multiply opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Jp4nNr9J4M1pBMGSI2PHwjChvwXlnocWAaSBu0MIP3gWAvmtQvWGBCzi2YBlFCdgSbD1_ba-B4sAzV1IpJtw61d267wd5X7Yl69TqBWGZMYGo-OHfeb_LAieF-rx5qAdoaO727N_usEWvPI1IZMHsHKo6IB9Hi00NY5cRE5DmemlsL1J5otCO2ZtMYd_h21mtaazFFv5HuHWZzUnrKzIpjE0FLc9NVKXkvh1BWCWWKSB_g7_w3Su7LHqzQ_7hamDR-pXFLRiqNyD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<h3 class="font-newsreader font-black text-3xl mb-2 tracking-tight uppercase">NEURAL GRID 4.0</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">A distributed computing archive utilizing neural pathways for decentralized asset storage and management.</p>
+<div class="mt-auto flex gap-2 flex-wrap">
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.1s;">PYTHON</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.2s;">PYTORCH</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.3s;">WASM</span>
+</div>
+</div>
+<div class="border-t-2 border-black p-4 flex justify-between items-center bg-surface-container-low">
+<span class="font-special-elite text-xs uppercase font-bold text-primary">Decipher Code</span>
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">code</span>
+</div>
+</div>
+<div class="absolute top-[8px] -right-[12px] h-full w-[12px] bg-primary-dim border-2 border-black skew-y-[45deg] z-0"></div>
+<div class="absolute -bottom-[12px] right-[4px] w-full h-[12px] bg-primary border-2 border-black skew-x-[45deg] z-0"></div>
+</div>
+<!-- Project Card 3: Urban Canvas -->
+<div class="book-flip group relative" style="--shadow-color: rgba(129,47,193,1);">
+<div class="relative z-10 bg-white border-2 border-black p-1 hover-lift-shadow h-[500px] flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-tertiary border-r border-black shadow-[inset_-2px_0px_4px_rgba(0,0,0,0.3)]"></div>
+<div class="pl-6 p-6 flex-grow flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<span class="font-special-elite text-[10px] text-outline">REF: URB-991</span>
+<span class="material-symbols-outlined text-tertiary text-4xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<div class="mb-6 h-48 bg-surface-container border-2 border-black overflow-hidden relative group-hover:bg-tertiary-container transition-colors duration-500">
+<img alt="Brutalist skyscraper" class="w-full h-full object-cover mix-blend-multiply opacity-80 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBToQ2zpuSCmfgOcluDi0ArH_kPc84BPocPz9gNPQALUDxqunDhAQV-BFK9seNVYRGDquZNamUw0gP6bDcaCutnVid1rpIDuyYKKFGjxEmKJUlYjiV2ajhq1KOKD21Tclj_ncepdkQFkPx0aozPMSWV4s8ifVGYOxGVpQTdXp-zf2s6N570V2TZd_BMofAM86ZhNdwvV_M1yz_cepTALvwhbBRoH-a13bDDIbkXZAH6ILlePaBWDqZ8Zp3gRZrjcifDNo7Zxe9eNYOm"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<h3 class="font-newsreader font-black text-3xl mb-2 tracking-tight uppercase">URBAN CANVAS</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-6">AR-based architectural overlay for urban explorers to visualize historical blueprints in real-time space.</p>
+<div class="mt-auto flex gap-2 flex-wrap">
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.1s;">UNITY</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.2s;">C#</span>
+<span class="tech-tag px-3 py-1 border border-black bg-surface-container-high text-[10px] font-bold uppercase tracking-wider" style="transition-delay: 0.3s;">ARCORE</span>
+</div>
+</div>
+<div class="border-t-2 border-black p-4 flex justify-between items-center bg-surface-container-low">
+<span class="font-special-elite text-xs uppercase font-bold text-tertiary">Explore Blueprint</span>
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">map</span>
+</div>
+</div>
+<div class="absolute top-[8px] -right-[12px] h-full w-[12px] bg-tertiary-dim border-2 border-black skew-y-[45deg] z-0"></div>
+<div class="absolute -bottom-[12px] right-[4px] w-full h-[12px] bg-tertiary border-2 border-black skew-x-[45deg] z-0"></div>
+</div>
+</div>
+<!-- Archives Navigation -->
+<div class="mt-32 perspective-container">
+<div class="border-4 border-black bg-surface-container p-1 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-stretch overflow-hidden book-flip hover:rotate-Y-0 hover:scale-[1.02]">
+<div class="flex-1 p-8 border-b-4 md:border-b-0 md:border-r-4 border-black bg-white hover:bg-secondary-container transition-colors cursor-pointer group">
+<span class="font-special-elite text-[10px] block mb-2">PREV ENTRY</span>
+<div class="flex justify-between items-center">
+<span class="font-newsreader font-black text-2xl group-hover:-translate-x-2 transition-transform">PROJECTS-2023</span>
+<span class="material-symbols-outlined">west</span>
+</div>
+</div>
+<div class="flex-1 p-8 bg-on-surface text-white flex flex-col justify-center items-center relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent pointer-events-none"></div>
+<span class="font-special-elite text-xs tracking-widest text-primary z-10">PAGE 01 / 04</span>
+<div class="flex gap-2 mt-4 z-10">
+<div class="w-8 h-1 bg-primary"></div>
+<div class="w-8 h-1 bg-white/20"></div>
+<div class="w-8 h-1 bg-white/20"></div>
+<div class="w-8 h-1 bg-white/20"></div>
+</div>
+</div>
+<div class="flex-1 p-8 bg-white border-t-4 md:border-t-0 md:border-l-4 border-black hover:bg-primary-container transition-colors cursor-pointer group">
+<span class="font-special-elite text-[10px] block mb-2 text-right">NEXT ENTRY</span>
+<div class="flex justify-between items-center">
+<span class="material-symbols-outlined">east</span>
+<span class="font-newsreader font-black text-2xl group-hover:translate-x-2 transition-transform uppercase text-right">Archives-Experimental</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script>
+    window.addEventListener('load', () => {
+        const titleContainer = document.querySelector('.unfold-container');
+        const parallaxTitle = document.querySelector('.parallax-title');
+        
+        // Trigger initial unfold
+        setTimeout(() => {
+            titleContainer.classList.add('unfold-active');
+        }, 300);
+
+        // Holographic & Parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            
+            // Mouse position for holographic glow
+            const xPercent = (clientX / innerWidth) * 100;
+            const yPercent = (clientY / innerHeight) * 100;
+            titleContainer.style.setProperty('--mouse-x', `${xPercent}%`);
+            titleContainer.style.setProperty('--mouse-y', `${yPercent}%`);
+
+            // Tilt calculation for parallax title
+            const rect = titleContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            const tiltX = (clientX - centerX) / (innerWidth / 2) * 15; // Max 15deg tilt
+            const tiltY = -(clientY - centerY) / (innerHeight / 2) * 15;
+            
+            titleContainer.style.setProperty('--tilt-x', `${tiltX}deg`);
+            titleContainer.style.setProperty('--tilt-y', `${tiltY}deg`);
+        });
+
+        // Reset tilt when mouse leaves container
+        titleContainer.addEventListener('mouseleave', () => {
+            titleContainer.style.setProperty('--tilt-x', `0deg`);
+            titleContainer.style.setProperty('--tilt-y', `0deg`);
+        });
+    });
+</script>
+</body></html>

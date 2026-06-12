@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Space+Grotesk:wght@300..700&amp;family=Special+Elite&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#f6f6f6",
+                        "secondary-fixed-dim": "#b5c0ff",
+                        "on-tertiary-fixed-variant": "#580091",
+                        "secondary": "#0846ed",
+                        "secondary-dim": "#003cd3",
+                        "surface-variant": "#dbdddd",
+                        "on-tertiary": "#fceeff",
+                        "tertiary-fixed-dim": "#c986ff",
+                        "on-primary-container": "#401500",
+                        "on-surface": "#2d2f2f",
+                        "primary-fixed": "#ff7a2f",
+                        "on-secondary-container": "#0035bf",
+                        "error-dim": "#b92902",
+                        "primary-fixed-dim": "#f66700",
+                        "tertiary-dim": "#741eb4",
+                        "surface-container": "#e7e8e8",
+                        "on-background": "#2d2f2f",
+                        "primary": "#9c3f00",
+                        "surface-tint": "#9c3f00",
+                        "on-tertiary-fixed": "#280046",
+                        "on-secondary-fixed-variant": "#003cd6",
+                        "primary-container": "#ff7a2f",
+                        "surface-bright": "#f6f6f6",
+                        "inverse-primary": "#fe6b00",
+                        "surface-container-high": "#e1e3e3",
+                        "on-secondary": "#f2f1ff",
+                        "tertiary-container": "#d299ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0c0f0f",
+                        "on-tertiary-container": "#4c007d",
+                        "on-primary-fixed-variant": "#4f1c00",
+                        "on-error": "#ffefec",
+                        "outline": "#757777",
+                        "primary-dim": "#893600",
+                        "on-secondary-fixed": "#002691",
+                        "tertiary": "#812fc1",
+                        "surface-container-highest": "#dbdddd",
+                        "secondary-container": "#c7cfff",
+                        "outline-variant": "#acadad",
+                        "inverse-on-surface": "#9c9d9d",
+                        "on-primary-fixed": "#000000",
+                        "tertiary-fixed": "#d299ff",
+                        "surface-dim": "#d2d5d5",
+                        "on-error-container": "#520c00",
+                        "secondary-fixed": "#c7cfff",
+                        "surface-container-low": "#f0f1f1",
+                        "on-primary": "#fff0ea",
+                        "surface": "#f6f6f6",
+                        "error": "#b02500",
+                        "error-container": "#f95630",
+                        "on-surface-variant": "#5a5c5c"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Space Grotesk", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"],
+                        "newsreader": ["Newsreader", "serif"],
+                        "space-grotesk": ["Space Grotesk", "sans-serif"],
+                        "special-elite": ["Special Elite", "cursive"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        @keyframes drift {
+            from { background-position: 0 0; }
+            to { background-position: 80px 140px; }
+        }
+
+        .isometric-grid {
+            background-image: 
+                linear-gradient(30deg, #e7e8e8 12%, transparent 12.5%, transparent 87%, #e7e8e8 87.5%, #e7e8e8),
+                linear-gradient(150deg, #e7e8e8 12%, transparent 12.5%, transparent 87%, #e7e8e8 87.5%, #e7e8e8),
+                linear-gradient(30deg, #e7e8e8 12%, transparent 12.5%, transparent 87%, #e7e8e8 87.5%, #e7e8e8),
+                linear-gradient(150deg, #e7e8e8 12%, transparent 12.5%, transparent 87%, #e7e8e8 87.5%, #e7e8e8),
+                linear-gradient(60deg, #dbdddd 25%, transparent 25.5%, transparent 75%, #dbdddd 75%, #dbdddd),
+                linear-gradient(60deg, #dbdddd 25%, transparent 25.5%, transparent 75%, #dbdddd 75%, #dbdddd);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            opacity: 0.3;
+            animation: drift 20s linear infinite;
+        }
+
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+        }
+        
+        .neo-shadow-orange {
+            box-shadow: 6px 6px 0px 0px #9c3f00;
+        }
+
+        .perspective-stage {
+            perspective: 2000px;
+            transform-style: preserve-3d;
+        }
+
+        .isometric-card {
+            transform: rotateX(10deg) rotateY(-15deg);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .isometric-card:hover {
+            transform: rotateX(0deg) rotateY(0deg) translateZ(50px);
+        }
+
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes pulse-glow-blue {
+            0%, 100% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 15px rgba(8, 70, 237, 0.4); }
+            50% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 30px rgba(8, 70, 237, 0.8); }
+        }
+
+        @keyframes pulse-glow-orange {
+            0%, 100% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 15px rgba(156, 63, 0, 0.4); }
+            50% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 30px rgba(156, 63, 0, 0.8); }
+        }
+
+        .glow-blue { animation: pulse-glow-blue 3s infinite ease-in-out; }
+        .glow-orange { animation: pulse-glow-orange 3s infinite ease-in-out; }
+
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid black;
+            background: white;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: width 0.3s, height 0.3s, border-radius 0.3s;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #9c3f00;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.6;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        .spring-entry {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: spring-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes spring-in {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .floating-ring {
+            transform: rotateX(15deg) rotateY(10deg);
+            transform-style: preserve-3d;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary selection:text-white overflow-x-hidden">
+<!-- Custom Cursor -->
+<div id="custom-cursor"></div>
+<!-- Top Navigation -->
+
+<!-- Main Hero Section -->
+<main class="relative min-h-screen flex items-center justify-center pt-8 pb-12 px-6 perspective-stage">
+<!-- Background Grid -->
+<div class="absolute inset-0 isometric-grid z-0 parallax-element" data-depth="0.1"></div>
+<div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+<!-- Left Content Area -->
+<div class="space-y-8 spring-entry" style="animation-delay: 0.1s;">
+<div class="inline-block bg-secondary text-white px-4 py-1 text-xs font-label uppercase tracking-[0.3em] neo-shadow mb-4 glow-blue">
+                    Product Designer &amp; Archival Architect
+                </div>
+<h1 class="font-newsreader text-7xl md:text-9xl font-black leading-[0.85] tracking-tighter text-black flex flex-col">
+<span class="inline-block transform -skew-x-6 parallax-element" data-depth="0.15">KINETIC</span>
+<span class="inline-block translate-x-4 text-primary parallax-element" data-depth="0.2">ARCHIVE</span>
+<span class="inline-block -translate-x-2 italic parallax-element" data-depth="0.1">VER 1.0</span>
+</h1>
+<p class="max-w-md font-body text-lg text-on-surface-variant border-l-4 border-black pl-6 py-2">
+                    A multi-dimensional exploration of interface physics and editorial digital experiences. Curating the future of spatial web interactions.
+                </p>
+<div class="flex flex-wrap gap-6 pt-6">
+<!-- Primary CTA -->
+<button class="magnetic group relative bg-primary-container text-on-primary-fixed font-newsreader font-black text-xl uppercase italic px-10 py-4 border-2 border-black neo-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all glow-orange">
+                        EXPLORE WORK
+                    </button>
+<!-- Secondary CTA -->
+<button class="magnetic group relative bg-secondary text-white font-newsreader font-black text-xl uppercase px-10 py-4 border-2 border-black neo-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all glow-blue">
+                        SAY HELLO
+                    </button>
+</div>
+<div class="flex items-center gap-4 pt-12">
+<span class="font-special-elite text-xs uppercase text-on-surface-variant">Active Terminal</span>
+<div class="h-[1px] flex-grow bg-outline-variant opacity-30"></div>
+<div class="flex gap-2">
+<div class="w-3 h-3 bg-secondary"></div>
+<div class="w-3 h-3 bg-primary"></div>
+<div class="w-3 h-3 bg-tertiary"></div>
+</div>
+</div>
+</div>
+<!-- Right Visual Area: 3D Isometric Construction -->
+<div class="relative h-[600px] flex items-center justify-center spring-entry" style="animation-delay: 0.3s;">
+<!-- Main Floating 3D Profile Structure -->
+<div class="relative w-80 h-80 z-20 parallax-element" data-depth="0.4">
+<!-- Geometric Frame 1 -->
+<div class="absolute inset-0 border-4 border-black neo-shadow rotate-[15deg] bg-surface-container-low/80 backdrop-blur-sm isometric-card"></div>
+<!-- Geometric Frame 2 -->
+<div class="absolute inset-4 border-4 border-primary rotate-[-10deg] bg-white flex items-center justify-center overflow-hidden isometric-card glow-orange magnetic">
+<img alt="Professional studio portrait of Gundelli Abhilash with high contrast lighting, clean background, and a sharp architectural aesthetic" class="w-full h-full object-cover grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-LSG-KrKPqOo0XcxHV7Tk2m4T0-VuPRoNWjg6BQnJfatG39Iu9-IjHpGzuNQtzpo2wnLrJCR9i7cBBw_97hQ05t7OA1f4AFdlqL2_7zjBuTldk0U-TwoOQ-sSwK6NzrzDLDn9NyVIIv8GHprRxKGWYNNl7KMrFlQo6pImlBsu8U1SoDSd36PSEfQsjZDDprjjHKSKxF4NeSrC0fDwCXv70Xb-1W8ED9hhSVeI0p1-_7748kvvW2UUtFhWF1V8r-I6qKIXXj40LZbZ"/>
+</div>
+<!-- Floating 3D Elements -->
+<div class="absolute -top-12 -right-12 w-24 h-24 bg-tertiary border-2 border-black neo-shadow flex items-center justify-center rotate-12 isometric-card glow-blue parallax-element" data-depth="0.6">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="deployed_code" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
+</div>
+<div class="absolute -bottom-8 -left-12 w-32 h-16 bg-white border-2 border-black neo-shadow flex items-center justify-center -rotate-6 isometric-card parallax-element" data-depth="0.5">
+<span class="font-special-elite text-sm font-bold text-black uppercase">Archivist</span>
+</div>
+<div class="absolute top-1/2 -right-20 transform -translate-y-1/2 w-16 h-16 rounded-full bg-secondary border-2 border-black neo-shadow flex items-center justify-center animate-bounce glow-blue magnetic">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="mouse" style="font-variation-settings: 'FILL' 1;">mouse</span>
+</div>
+</div>
+<!-- 3D Block Lettering -->
+<div class="absolute top-10 right-0 font-newsreader font-black text-9xl text-surface-container-highest/20 select-none -z-10 transform rotate-90 origin-bottom-right floating-ring parallax-element" data-depth="0.2">
+                    KINETIC
+                </div>
+<!-- Decorative Elements -->
+<div class="absolute top-1/4 left-0 w-12 h-12 bg-primary-container border-2 border-black neo-shadow rotate-45 isometric-card glow-orange parallax-element" data-depth="0.8"></div>
+<div class="absolute bottom-1/4 right-1/4 w-8 h-8 bg-on-tertiary-container border-2 border-black neo-shadow -rotate-12 isometric-card glow-blue parallax-element" data-depth="0.7"></div>
+</div>
+</div>
+</main>
+<!-- Project Snippets (Bento Style) -->
+<section class="max-w-7xl mx-auto px-6 py-24 border-t-4 border-black">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Large Featured Card -->
+<div class="md:col-span-2 bg-surface-container-low border-2 border-black neo-shadow group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
+<div class="bg-black text-white p-4 flex justify-between items-center">
+<span class="font-label font-bold uppercase text-xs tracking-widest">Case Study // 001</span>
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</div>
+<div class="aspect-video bg-stone-300 overflow-hidden">
+<img alt="Sleek user interface design featuring isometric layout elements, bold typography, and a vibrant orange and blue color scheme" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz-yRLzW5_nYZyIHRVZmrbQ-7RQ5tO3-5AG7TjluaHnfmZLGx2lyHlMdr2GES0qwUJFVlxa83_diZUpINzfh3TKBDgylSYOLxk-e7RWRQLhZgwLFTEwqUVcZLSAOICjmuef527ekDuPYjb1NBCaMxHZkQrUABzZFc4diuirnI_Hkcorw1AYjdBBQy8hSx2vao-SplHM-MmmcVXjX4qKrvF3B3u-7JXXm1-6A_rBO2JI-jCf20KiT5YnfcY86SY-dli5oE28KDBx1PV"/>
+</div>
+<div class="p-8">
+<h3 class="font-newsreader text-4xl font-black mb-4">Spatial Workspace v2</h3>
+<p class="font-body text-on-surface-variant max-w-lg mb-6">Redefining productivity through depth and physical metaphors. A complete overhaul of the digital office ecosystem.</p>
+<div class="flex gap-2">
+<span class="bg-secondary/10 text-secondary border border-secondary px-3 py-1 text-xs font-bold uppercase tracking-tighter">UI/UX</span>
+<span class="bg-primary/10 text-primary border border-primary px-3 py-1 text-xs font-bold uppercase tracking-tighter">Web3</span>
+<span class="bg-tertiary/10 text-tertiary border border-tertiary px-3 py-1 text-xs font-bold uppercase tracking-tighter">Motion</span>
+</div>
+</div>
+</div>
+<!-- Vertical Metadata Card -->
+<div class="bg-primary border-2 border-black neo-shadow p-8 flex flex-col justify-between text-white hover:bg-primary-dim transition-colors group">
+<div>
+<span class="material-symbols-outlined text-6xl mb-6 group-hover:rotate-12 transition-transform inline-block" data-icon="architecture" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<h3 class="font-newsreader text-4xl font-black italic leading-none mb-4">Design Philosophy</h3>
+<p class="font-special-elite text-sm leading-relaxed opacity-90">Every pixel is a structural anchor. I build interfaces that refuse to be flat, demanding interaction and spatial awareness from the user.</p>
+</div>
+<div class="pt-12 border-t border-white/20">
+<div class="flex justify-between items-end">
+<span class="font-label font-black text-6xl opacity-20">01</span>
+<button class="bg-white text-black px-4 py-2 font-bold text-sm border-2 border-black neo-shadow-orange active:translate-y-1 magnetic">READ MANIFESTO</button>
+</div>
+</div>
+</div>
+<!-- Secondary Service Cards -->
+<div class="bg-white border-2 border-black neo-shadow p-6 isometric-card">
+<span class="material-symbols-outlined text-secondary text-3xl mb-4" data-icon="view_in_ar">view_in_ar</span>
+<h4 class="font-newsreader text-2xl font-black mb-2">3D Systems</h4>
+<p class="font-body text-sm text-on-surface-variant">Implementation of WebGL and Three.js for immersive storytelling.</p>
+</div>
+<div class="bg-secondary-container border-2 border-black neo-shadow p-6 isometric-card">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl mb-4" data-icon="token">token</span>
+<h4 class="font-newsreader text-2xl font-black mb-2">Visual ID</h4>
+<p class="font-body text-sm text-on-surface-variant">High-fidelity brand systems that bridge the gap between physical and digital.</p>
+</div>
+<div class="bg-surface-container-highest border-2 border-black neo-shadow p-6 isometric-card">
+<span class="material-symbols-outlined text-black text-3xl mb-4" data-icon="terminal">terminal</span>
+<h4 class="font-newsreader text-2xl font-black mb-2">Prototyping</h4>
+<p class="font-body text-sm text-on-surface-variant">Rapid iteration from wireframes to physics-based high-fidelity mocks.</p>
+</div>
+</div>
+</section>
+<!-- Footer -->
+
+<script>
+        const cursor = document.getElementById('custom-cursor');
+        const magneticElements = document.querySelectorAll('.magnetic');
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        // Custom Cursor Movement
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Background Parallax
+            parallaxElements.forEach(el => {
+                const depth = parseFloat(el.getAttribute('data-depth')) || 0;
+                const moveX = (window.innerWidth / 2 - mouseX) * depth;
+                const moveY = (window.innerHeight / 2 - mouseY) * depth;
+                el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+            });
+
+            // Trail creation
+            if (Math.random() > 0.8) {
+                createTrail(e.clientX, e.clientY);
+            }
+        });
+
+        function animateCursor() {
+            let dx = mouseX - cursorX;
+            let dy = mouseY - cursorY;
+            cursorX += dx * 0.15;
+            cursorY += dy * 0.15;
+            cursor.style.left = `${cursorX - 10}px`;
+            cursor.style.top = `${cursorY - 10}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        function createTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+            document.body.appendChild(trail);
+            
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 20 + Math.random() * 30;
+            
+            setTimeout(() => {
+                trail.style.transform = `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px) scale(0) rotate(45deg)`;
+                trail.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => trail.remove(), 600);
+        }
+
+        // Magnetic Effect
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursor.style.borderRadius = '50%';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `translate(0px, 0px)`;
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursor.style.borderRadius = '0px';
+            });
+        });
+
+        // Add 3D rotation to isometric cards on mouse move
+        const cards = document.querySelectorAll('.isometric-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                const dx = x - xc;
+                const dy = y - yc;
+                card.style.transform = `rotateY(${dx / 10}deg) rotateX(${-dy / 10}deg) translateZ(20px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body></html>
