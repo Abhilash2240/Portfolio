@@ -499,7 +499,8 @@ caption {
 
 /* ── Page transition overlay ─────────────────────────────────────────────── */
 .page-wrapper {
-  min-height: 100vh;
+  /* Allow sections to size to their content to avoid large whitespace gaps */
+  min-height: auto;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────────── */
@@ -613,12 +614,13 @@ caption {
 
 @media (max-width: 768px) {
   .stitch-grid,
-  .stitch-glow,
+    padding-block: var(--space-12);
   .stitch-light-ray,
   .glow-blue,
+
   .glow-orange {
     animation: none !important;
-  }
+    padding-block: var(--space-12);
 }
 
 @media (max-width: 480px) {
