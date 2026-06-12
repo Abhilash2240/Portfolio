@@ -614,13 +614,12 @@ caption {
 
 @media (max-width: 768px) {
   .stitch-grid,
-    padding-block: var(--space-12);
+  .stitch-glow,
   .stitch-light-ray,
   .glow-blue,
-
   .glow-orange {
     animation: none !important;
-    padding-block: var(--space-12);
+  }
 }
 
 @media (max-width: 480px) {
