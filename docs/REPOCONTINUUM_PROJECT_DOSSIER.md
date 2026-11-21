@@ -111,7 +111,7 @@ SWE-bench Verified is a human-validated subset of 500 SWE-bench instances. It is
 
 ### 2.4 Long-horizon software engineering survey
 
-**Long-Horizon Software Engineering Agents: From Tasks to Projects** is a 2026 survey discussing the shift from isolated tasks toward agents that must maintain software over time. Its research agenda highlights retained obligations, predecessor state, external changes and consistent reporting as important open problems.
+**Long-Horizon Software Engineering Agents: From Tasks to Projects** is a 2026 survey/manuscript discussing the shift from isolated tasks toward agents that must maintain software over time. It distinguishes two important measurements: retained functionality (whether earlier accepted behaviour still works) and conformance to active requirements (whether all currently active requirements are satisfied). It also highlights predecessor state, external changes, handoff and consistent reporting as open problems.
 
 - Survey and reference library: https://longhorizonswe.github.io/
 
@@ -614,6 +614,13 @@ Use the same underlying model/provider, model settings, attempt limit, tool avai
 
 ### 10.4 Metrics and definitions
 
+In addition to task-level outcomes, measure whether accepted earlier behaviour survives later changes. The 2026 long-horizon SWE survey proposes separating **retained functionality** from **conformance to active requirements**. RepoContinuum should adopt that distinction in its chain report:
+
+- **Retained functionality at checkpoint t:** share of earlier obligations that are still active under the current specification, have an eligible check, and whose checks all pass at checkpoint t.
+- **Conformance to active requirements at checkpoint t:** share of all requirements marked active at t (including requirements the agent previously failed) whose checks pass at t.
+
+This prevents a chain from looking successful merely because its last issue passed while earlier accepted behaviour has regressed. Each benchmark chain therefore needs an explicit obligation ledger with status (`active`, `superseded`, `withdrawn`) and a test/oracle for each measurable obligation. An obligation must not disappear simply because the agent failed it; only a documented change to the specification may supersede or withdraw it.
+
 | Metric | Definition |
 |---|---|
 | Chain completion rate | Number of chains in which every task reaches its declared acceptance/test gate divided by total attempted chains |
@@ -632,6 +639,7 @@ Do not combine these into one opaque score. Report counts and denominators along
 
 ### 10.5 Evaluation integrity
 
+- Maintain an obligation ledger with stable IDs, source task, acceptance text, test/oracle, status and status-change rationale. Report retained functionality and conformance to active requirements at every checkpoint where they can be computed.
 - Freeze task definitions and test oracles before comparing variants.
 - Keep evaluation tasks separate from prompts/examples used to develop the agent when feasible.
 - Do not expose hidden expected patches or tests to the model.
