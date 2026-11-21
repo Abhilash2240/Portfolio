@@ -9,7 +9,7 @@ export default function ExperiencePage() {
   return (
     <main className="page-wrapper page-section" aria-labelledby="experience-heading">
       <header>
-        <p class="eyebrow">Experience</p>
+        <p className="eyebrow">Experience</p>
         <h1 id="experience-heading">Project experience</h1>
       </header>
       <p style={{ maxWidth: '70ch', lineHeight: 1.8, marginTop: 'var(--space-6)' }}>
