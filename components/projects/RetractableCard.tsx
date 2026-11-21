@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
@@ -12,194 +13,75 @@ function GithubIcon({ size = 14 }: { size?: number }) {
 }
 
 type RetractableCardProps = {
-  id:       number
-  title:    string
-  year:     string
-  tags:     readonly string[]
-  points:   readonly string[]
-  github:   string
-  isOpen:   boolean
+  id: number
+  title: string
+  year: string
+  problem: string
+  architecture: string
+  tags: readonly string[]
+  points: readonly string[]
+  github: string
+  liveUrl: string
+  isOpen: boolean
   onToggle: () => void
-  index:    number
+  index: number
 }
 
 export default function RetractableCard({
-  id, title, year, tags, points, github, isOpen, onToggle, index,
+  id, title, year, problem, architecture, tags, points, github, liveUrl, isOpen, onToggle, index,
 }: RetractableCardProps) {
   const reduceMotion = useReducedMotion()
 
   return (
-    <article
-      className="isometric-card reveal-step"
-      style={{
-        borderLeft:      isOpen ? '3px double var(--color-stamp-red)' : '3px double var(--color-aged-gold)',
-        borderTop:       '3px double var(--color-aged-gold)',
-        borderRight:     '3px double var(--color-aged-gold)',
-        borderBottom:    isOpen ? '3px double var(--color-stamp-red)' : '3px double var(--color-aged-gold)',
-        transition:      'border-color 500ms var(--ease-standard)',
-        backgroundColor: isOpen ? 'var(--color-surface-low)' : 'transparent',
-        minHeight:       isOpen ? 'auto' : '64px',
-      }}
-    >
-      {/* Card header — always visible */}
-      <button
-        id={`project-toggle-${id}`}
-        aria-expanded={isOpen}
-        aria-controls={`project-content-${id}`}
-        onClick={onToggle}
-        className="magnetic"
-        style={{
-          width:          '100%',
-          display:        'flex',
-          alignItems:     'center',
-          justifyContent: 'space-between',
-          minHeight:      '64px',
-          padding:        'var(--space-3) var(--space-6)',
-          background:     'none',
-          border:         'none',
-          cursor:         'pointer',
-          gap:            'var(--space-4)',
-          textAlign:      'left',
-        }}
-      >
+    <article className="isometric-card reveal-step" style={{
+      borderLeft: isOpen ? '3px double var(--color-stamp-red)' : '3px double var(--color-aged-gold)',
+      borderTop: '3px double var(--color-aged-gold)', borderRight: '3px double var(--color-aged-gold)',
+      borderBottom: isOpen ? '3px double var(--color-stamp-red)' : '3px double var(--color-aged-gold)',
+      transition: 'border-color 500ms var(--ease-standard)', backgroundColor: isOpen ? 'var(--color-surface-low)' : 'transparent', minHeight: isOpen ? 'auto' : '64px',
+    }}>
+      <button id={`project-toggle-${id}`} aria-expanded={isOpen} aria-controls={`project-content-${id}`} onClick={onToggle} className="magnetic" style={{
+        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', minHeight: '64px',
+        padding: 'var(--space-3) var(--space-6)', background: 'none', border: 'none', cursor: 'pointer', gap: 'var(--space-4)', textAlign: 'left',
+      }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', flex: 1, flexWrap: 'wrap' }}>
-          {/* Index number */}
-          <span style={{
-            fontFamily:    'var(--font-mono)',
-            fontSize:      'var(--text-body-xs)',
-            color:         'var(--color-aged-gold)',
-            letterSpacing: '0.05em',
-          }}>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-
-          {/* Title */}
-          <span style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 700,
-            fontSize:   'var(--text-body-lg)',
-            color:      'var(--color-ink)',
-          }}>
-            {title}
-          </span>
-
-          {/* Year stamp */}
-          <span
-            className="stamp-chip"
-            style={{ color: 'var(--color-stamp-red)' }}
-          >
-            {year}
-          </span>
-
-          {/* Tags (hidden on mobile) */}
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--text-body-xs)', color: 'var(--color-aged-gold)' }}>{String(index + 1).padStart(2, '0')}</span>
+          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--text-body-lg)', color: 'var(--color-ink)' }}>{title}</span>
+          <span className="stamp-chip" style={{ color: 'var(--color-stamp-red)' }}>{year}</span>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }} className="tags-desktop">
-            {tags.map(tag => (
-              <span
-                key={tag}
-                className="stamp-chip"
-                style={{ color: 'var(--color-prussian-blue)', fontSize: 'var(--text-body-xs)' }}
-              >
-                {tag}
-              </span>
-            ))}
+            {tags.map(tag => <span key={tag} className="stamp-chip" style={{ color: 'var(--color-prussian-blue)', fontSize: 'var(--text-body-xs)' }}>{tag}</span>)}
           </div>
         </div>
-
-        {/* Arrow */}
-        <ChevronDown
-          size={20}
-          aria-hidden="true"
-          style={{
-            color:      'var(--color-aged-gold)',
-            transition: reduceMotion ? 'none' : 'transform 400ms var(--ease-standard)',
-            transform:  isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            flexShrink: 0,
-          }}
-        />
+        <ChevronDown size={20} aria-hidden="true" style={{ color: 'var(--color-aged-gold)', transition: reduceMotion ? 'none' : 'transform 400ms var(--ease-standard)', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }} />
       </button>
 
-      {/* Expandable content */}
-      <div
-        id={`project-content-${id}`}
-        role="region"
-        aria-labelledby={`project-toggle-${id}`}
-        style={{
-          maxHeight:  isOpen ? '720px' : '0',
-          overflow:   'hidden',
-          transition: reduceMotion ? 'none' : 'max-height 500ms var(--ease-standard)',
-        }}
-      >
+      <div id={`project-content-${id}`} role="region" aria-labelledby={`project-toggle-${id}`} style={{ maxHeight: isOpen ? '900px' : '0', overflow: 'hidden', transition: reduceMotion ? 'none' : 'max-height 500ms var(--ease-standard)' }}>
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: -10 }}
-              animate={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
-              exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-              transition={reduceMotion ? { duration: 0 } : { duration: 0.3 }}
-              style={{ padding: '0 var(--space-6) var(--space-6)' }}
-            >
-              {/* Divider */}
-              <div style={{
-                borderTop:    '1px solid var(--color-aged-gold)',
-                opacity:      0.3,
-                marginBottom: 'var(--space-4)',
-              }} />
+            <motion.div initial={reduceMotion ? false : { opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }} transition={reduceMotion ? { duration: 0 } : { duration: 0.3 }} style={{ padding: '0 var(--space-6) var(--space-6)' }}>
+              <div style={{ borderTop: '1px solid var(--color-aged-gold)', opacity: 0.3, marginBottom: 'var(--space-4)' }} />
 
-              {/* OPEN stamp */}
-              <motion.div
-                initial={reduceMotion ? false : { scale: 1.2, rotate: -8, opacity: 0 }}
-                animate={{ scale: 1, rotate: -8, opacity: 0.85 }}
-                transition={reduceMotion ? { duration: 0 } : { duration: 0.15, ease: [0.0, 0.9, 0.57, 1.0], delay: 0.1 }}
-                style={{
-                  display:     'inline-flex',
-                  marginBottom: 'var(--space-4)',
-                }}
-              >
-                <span style={{
-                  fontFamily:    'var(--font-display)',
-                  fontWeight:    900,
-                  fontSize:      'var(--text-heading-md)',
-                  color:         'var(--color-stamp-red)',
-                  border:        '4px solid var(--color-stamp-red)',
-                  padding:       'var(--space-1) var(--space-3)',
-                  letterSpacing: '0.04em',
-                  opacity:       0.8,
-                  transform:     'rotate(-8deg)',
-                }}>
-                  OPEN
-                </span>
-              </motion.div>
+              <p style={{ fontFamily: 'var(--font-body)', lineHeight: 1.7, color: 'var(--color-ink)', marginBottom: 'var(--space-3)' }}><strong>Problem:</strong> {problem}</p>
+              <p style={{ fontFamily: 'var(--font-mono)', lineHeight: 1.6, color: 'var(--color-on-surface-variant)', fontSize: 'var(--text-body-xs)', marginBottom: 'var(--space-5)' }}><strong>Architecture:</strong> {architecture}</p>
 
-              {/* Bullet points */}
               <ul role="list" style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', marginBottom: 'var(--space-6)' }}>
                 {points.map((point, i) => (
-                  <motion.li
-                    key={i}
-                    initial={reduceMotion ? false : { opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={reduceMotion ? { duration: 0 } : { duration: 0.3, delay: 0.15 + i * 0.07 }}
-                    style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-start' }}
-                  >
+                  <motion.li key={i} initial={reduceMotion ? false : { opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={reduceMotion ? { duration: 0 } : { duration: 0.3, delay: 0.15 + i * 0.07 }} style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
                     <span style={{ color: 'var(--color-aged-gold)', flexShrink: 0, marginTop: '2px' }}>✦</span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--color-ink)' }}>
-                      {point}
-                    </span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--color-ink)' }}>{point}</span>
                   </motion.li>
                 ))}
               </ul>
 
-              {/* GitHub link */}
-              <a
-                href={github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View ${title} on GitHub`}
-                className="ink-wash-btn"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)', borderColor: 'var(--color-ink)', color: 'var(--color-ink)', textDecoration: 'none', fontSize: 'var(--text-body-xs)', padding: 'var(--space-2) var(--space-4)' }}
-              >
-                <GithubIcon size={14} aria-hidden="true" />
-                View on GitHub
-              </a>
+              <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+                <a href={github} target="_blank" rel="noopener noreferrer" aria-label={`View ${title} on GitHub`} className="ink-wash-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: 'var(--space-2)', borderColor: 'var(--color-ink)', color: 'var(--color-ink)', textDecoration: 'none', fontSize: 'var(--text-body-xs)', padding: 'var(--space-2) var(--space-4)' }}>
+                  <GithubIcon size={14} /> View repository
+                </a>
+                {liveUrl && (
+                  <a href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${title} live demo`} className="ink-wash-btn" style={{ display: 'inline-flex', alignItems: 'center', borderColor: 'var(--color-aged-gold)', color: 'var(--color-aged-gold)', textDecoration: 'none', fontSize: 'var(--text-body-xs)', padding: 'var(--space-2) var(--space-4)' }}>
+                    Open live demo
+                  </a>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
